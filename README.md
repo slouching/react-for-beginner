@@ -1,9 +1,9 @@
 # What we’ll cover:
 
-What Is 'State' in ReactJS?
+Conditional Rendering
 
-What does setState do?
+Animated Popup Modal Box
 
-What is the onClick handler in React?
+Using Children in React
 
-Call functions in an onClick event handler
+How to Use Props in React
