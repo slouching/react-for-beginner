@@ -2,63 +2,117 @@ import React, {useState} from 'react'
 
 import './index.css'
 
-const Modal = ({open, setOpen, children}) => (
-    <div className={`overlay animated ${open ? 'show' : ''}`}>
-        <div className="modal">
-            <svg onClick={() => setOpen(false)} height="200" viewBox="0 0 200 200" width="200">
-                <title/>
-                <path
-                    d="M114,100l49-49a9.9,9.9,0,0,0-14-14L100,86,51,37A9.9,9.9,0,0,0,37,51l49,49L37,149a9.9,9.9,0,0,0,14,14l49-49,49,49a9.9,9.9,0,0,0,14-14Z"/>
-            </svg>
+const questions = [
+    {
+        title: 'What is ReactJS?',
+        answerOptions: [
+            'Server-side Framework',
+            'User-interface framework',
+            'A Library for building interaction interfaces',
+            'None of the Above',
+        ],
+        correct: 2,
+    },
+    {
+        title: 'Everything in React is a ______',
+        answerOptions: [
+            'Module',
+            'Component',
+            'Package',
+            'Class',
+        ],
+        correct: 1,
+    },
+    {
+        title: 'What is Babel?',
+        answerOptions: [
+            'A transpiler',
+            'An interpreter',
+            'A Compiler',
+            'Both Compiler and Transpilar',
+        ],
+        correct: 3,
+    },
+    {
+        title: 'Props are ______ into other components',
+        answerOptions: [
+            'Injected',
+            'Methods',
+            'Both A and B',
+            'All of these',
+        ],
+        correct: 1,
+    },
+    {
+        title: 'How can you access the state of a component from inside of a member function?',
+        answerOptions: [
+            'this.getState()',
+            'this.prototype.stateValue',
+            'this.state',
+            'this.values',
+        ],
+        correct: 3,
+    },
 
-            {/*Without props*/}
-            {/*<img src="https://media1.giphy.com/media/3If8u5wFsfII0/giphy.gif" alt="Modal"/>*/}
+]
 
-            {/*With props*/}
-            {children}
-        </div>
+function Result({correct, handleRestartClick}) {
+    return <div className="result">
+        <img src="https://cdn-icons-png.flaticon.com/512/6372/6372105.png" alt="the end"/>
+        <h2>You answered {correct} out of {questions.length} correctly</h2>
+        <button onClick={() => handleRestartClick()}>Try again</button>
     </div>
-)
+}
+
+function Game({step, question, handleAnswerClick}) {
+    const progress = Math.round(step / questions.length * 100).toString()
+
+    return <>
+        <div className="progress">
+            <div style={{width: `${progress}%`}} className="progress__inner"></div>
+        </div>
+        <h1>{question.title}</h1>
+        <ul>
+            {question.answerOptions.map((answerOption, index) => {
+                return (
+                    <li
+                        key={index}
+                        onClick={() => handleAnswerClick(index)}
+                    >
+                        {answerOption}
+                    </li>)
+            })}
+        </ul>
+        <small className="counter">{step + 1} of {questions.length}</small>
+    </>
+}
 
 function App() {
-    const [open, setOpen] = useState(false)
+    const [step, setStep] = useState(0)
+    const [correct, setCorrect] = useState(0)
+    const question = questions[step]
 
-    return (
-        <div className="App">
-            <button onClick={() => setOpen(true)} className="open-modal-button">Open</button>
+    const handleAnswerClick = (answerOption) => {
+        setStep(step + 1)
 
-            {/*Conditional Rendering*/}
-            {/*{open && (
-                <div className="overlay">
-                    <div className="modal">
-                        <svg onClick={() => setOpen(false)} height="200" viewBox="0 0 200 200" width="200">
-                            <title/>
-                            <path
-                                d="M114,100l49-49a9.9,9.9,0,0,0-14-14L100,86,51,37A9.9,9.9,0,0,0,37,51l49,49L37,149a9.9,9.9,0,0,0,14,14l49-49,49,49a9.9,9.9,0,0,0,14-14Z"/>
-                        </svg>
-                        <img src="https://media1.giphy.com/media/3If8u5wFsfII0/giphy.gif" alt="Modal"/>
-                    </div>
-                </div>
-            )}*/}
-            {/*{open && <Modal open={open} setOpen={setOpen} />}*/}
+        if (answerOption === question.correct) {
+            setCorrect(correct + 1)
+        }
+    }
 
-            {/*Open by adding className*/}
-            {/*<div className={`overlay animated ${open ? 'show' : ''}`}>*/}
-            {/*    <div className="modal">*/}
-            {/*        <svg onClick={() => setOpen(false)} height="200" viewBox="0 0 200 200" width="200">*/}
-            {/*            <title/>*/}
-            {/*            <path*/}
-            {/*                d="M114,100l49-49a9.9,9.9,0,0,0-14-14L100,86,51,37A9.9,9.9,0,0,0,37,51l49,49L37,149a9.9,9.9,0,0,0,14,14l49-49,49,49a9.9,9.9,0,0,0,14-14Z"/>*/}
-            {/*        </svg>*/}
-            {/*        <img src="https://media1.giphy.com/media/3If8u5wFsfII0/giphy.gif" alt="Modal"/>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            <Modal open={open} setOpen={setOpen}>
-                <h3>Modal title</h3>
-                <img src="https://media1.giphy.com/media/3If8u5wFsfII0/giphy.gif" alt="Modal"/>
-            </Modal>
-        </div>
-    )
+    const handleRestartClick = () => {
+        if (step === questions.length) {
+            setStep(0)
+        }
+    }
+
+    return <div className="App">
+        {
+            step !== questions.length
+                ? <Game step={step} question={question} handleAnswerClick={handleAnswerClick}/>
+                : <Result correct={correct} handleRestartClick={handleRestartClick}/>
+        }
+    </div>
 }
 
 export default App

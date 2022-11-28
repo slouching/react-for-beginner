@@ -5,93 +5,109 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-.App {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: #B2B1CC;
+}
+
+.App {
+    width: 500px;
+    border-radius: 30px;
+    padding: 40px;
+    background-color: #fff;
+    position: relative;
+}
+
+.App .result {
     text-align: center;
 }
 
-.open-modal-button {
-    background: transparent;
-    padding: 15px 20px;
-    border-radius: 6px;
-    transition: all 0.1s ease-in-out;
+.App .result button {
+    font-weight: bold;
+    border-radius: 30px;
+    border: 0;
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: #40ADA9;
+    color: #fff;
+    margin-top: 20px;
     cursor: pointer;
-    border: 1px solid blue;
-    color: blue;
 }
 
-.open-modal-button:hover {
-    color: white;
-    background-color: blue;
+.App .result h2 {
+    margin-bottom: 0;
 }
 
-.overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+.App .result img {
+    width: 150px;
+}
+
+.App .progress {
+    height: 10px;
+    border-radius: 30px;
+    background-color: #e8e8e8;
+    margin-bottom: 25px;
+}
+
+.App .progress__inner {
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    transition: all 0.5s ease-in-out;
+    border-radius: 30px;
+    width: 80%;
+    background: #12e730;
+    transition: all 0.3s ease-in-out;
+    background: linear-gradient(90deg, rgba(255, 159, 124, 1) 0%, rgba(64, 173, 169, 1) 100%);
 }
 
-.modal {
-    background-color: #fff;
-    width: 70%;
-    max-width: 500px;
-    padding: 40px 30px;
-    border-radius: 6px;
+.App:before, .App:after {
+    content: '';
+    display: block;
+    height: 50px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s ease-in-out;
+    transform: translateX(-50%);
 }
 
-.modal img {
-    border-radius: 6px;
-    width: 100%;
+.App .counter {
+    display: block;
+    text-align: center;
 }
 
-.modal svg {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    height: 24px;
-    width: 24px;
-    opacity: 0.3;
+.App:before {
+    width: 95%;
+    bottom: -10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 0;
+}
+
+.App:after {
+    width: 90%;
+    bottom: -20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+.App h1 {
+    margin: 0;
+}
+
+.App ul {
+    list-style: none;
+    padding: 0;
+}
+
+.App ul li {
+    padding: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    margin-bottom: 10px;
     cursor: pointer;
+    transition: all 0.1s ease-in-out;
 }
 
-.modal svg:hover {
-    opacity: 1;
-}
-
-.overlay.animated {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.overlay.animated .modal {
-    opacity: 0;
-    visibility: hidden;
-    transform: translate(-50%, -30%);
-    transition-delay: 0.2s;
-}
-
-.overlay.animated.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.overlay.animated.show .modal {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%);
+.App ul li:hover {
+    border: 2px solid rgba(0, 0, 0, 0.3);
 }

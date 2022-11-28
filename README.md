@@ -2,8 +2,10 @@
 
 Conditional Rendering
 
-Animated Popup Modal Box
+Progress Bar
+
+Progress Counter
 
 Using Children in React
 
-How to Use Props in React
+Passing Props to a Component
