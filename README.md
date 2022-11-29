@@ -1,11 +1,15 @@
 # What we’ll cover:
 
-Conditional Rendering
+Using the Effect Hook
 
-Progress Bar
+Fetch API & Rendering Data with ReactJS
 
-Progress Counter
+React Skeleton - Create Content Loader
 
-Using Children in React
+Rendering list of users
 
-Passing Props to a Component
+Spread Operator
+
+Invitation array & add/remove users
+
+Display information about downloading content
