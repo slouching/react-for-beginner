@@ -1,31 +1,66 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import {Success} from './components/Success'
+import {Users} from './components/Users'
 
 import './index.css'
 
 function App() {
-    const [count, setCount] = useState(0)
+    const [users, setUsers] = useState([])
+    const [isLoading, setLoading] = useState(true)
+    const [searchValue, setSearchValue] = useState('')
+    const [invites, setInvites] = useState([])
+    const [success, setSuccess] = useState(false)
 
-    const decrease = () => {
-        setCount(count - 1)
+    useEffect(() => {
+        fetch('https://reqres.in/api/users')
+            .then(res => res.json())
+            .then(json => setUsers(json.data))
+            .catch(err => {
+                console.warn(err)
+                alert('Не удалось получить список пользователей')
+            })
+            .finally(() => setLoading(false))
+    }, [])
+
+    const onChangeSearchValue = (event) => {
+        setSearchValue(event.target.value)
     }
 
-    const increase = () => {
-        setCount(count + 1)
+    const onClickInvite = (id) => {
+        if (invites.includes(id)) {
+            setInvites(prev => prev.filter(_id => _id !== id))
+        } else {
+            setInvites(prev => [...prev, id])
+        }
     }
 
-    const reset = () => {
-        setCount(0)
+    const onClickSendInvites = () => {
+        setSuccess(true)
+    }
+
+    const onClickRestart = () => {
+        setInvites([])
+        setSuccess(false)
     }
 
     return (
         <div className="App">
-            <div>
-                <h1 className="title">Counter:</h1>
-                <h2 className="output">{count}</h2>
-                <button onClick={decrease} className="decrease">- Decrease</button>
-                <button onClick={reset} className="reset">Reset</button>
-                <button onClick={increase} className="increase">Increase +</button>
-            </div>
+            {
+                success
+                    ? <Success
+                        count={invites.length}
+                        onClickRestart={onClickRestart}
+                    />
+                    : <Users
+                        items={users}
+                        isLoading={isLoading}
+                        searchValue={searchValue}
+                        onChangeSearchValue={onChangeSearchValue}
+                        invites={invites}
+                        onClickInvite={onClickInvite}
+                        onClickSendInvites={onClickSendInvites}
+                    />
+            }
         </div>
     )
 }
