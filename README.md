@@ -14,4 +14,4 @@ Invitation array & add/remove users
 
 Display information about downloading content
 
-<img width="575" alt="Screenshot 2022-11-29 at 17 06 07" src="https://user-images.githubusercontent.com/32794343/204552244-42c955de-80f5-4f6d-a124-e7f76adbcfb1.png">
+<img width="469" alt="Screenshot 2022-11-25 at 15 34 29" src="https://user-images.githubusercontent.com/32794343/203987855-351442a7-e149-4cd8-8e26-e87a60fcb303.png">
