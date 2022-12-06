@@ -1,15 +1,9 @@
 # What we’ll cover:
 
-Using the Effect Hook
+Filtering by category
 
-Fetch API & Rendering Data with ReactJS
+Search
 
-React Skeleton - Create Content Loader
+Pagination (add query params to GET requests)
 
-Rendering list of users
-
-Spread Operator
-
-Invitation array & add/remove users
-
-Display information about downloading content
+Content upload info (conditional rendering)
