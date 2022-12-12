@@ -1,9 +1,9 @@
 # What we’ll cover:
 
-Filtering by category
+{JSON} Placeholder. Free fake API for testing and prototyping.
 
-Search
+Using the State Hook
 
-Pagination (add query params to GET requests)
+Using the Effect Hook
 
-Content upload info (conditional rendering)
+A response header is an HTTP header
